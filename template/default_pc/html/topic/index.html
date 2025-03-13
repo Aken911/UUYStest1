@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<title>{$obj.topic_name}专题详情- {$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.topic_name}电影专题,{$obj.topic_name}电视剧专题,{$obj.topic_name}综艺专题,{$obj.topic_name}动漫专题,{$obj.topic_name}推荐专题" />
+		<meta name="description" content="本站提供{$obj.topic_name},最新最全精品专题数据" />
+		{include file="system/include"}
+	</head>
+	<body>
+		{include file="system/headtop"}
+		<div class="container">
+		{include file="system/search"}
+		{include file="system/headmeun"}
+		<div class="content">
+		<div class="main-content">
+			<div class="main-container">
+				<div id="list_playlists_common_playlists_list">
+
+							<div class="headline">
+								<h1> 最受欢迎的专题 </h1>
+								<div class="sort">
+									<span class="icon type-sort"></span>
+									<strong>{if$param.by==''||$param.by=='time'}最新{/if}
+									{if$param.by=='hits'}热门{/if}
+									{if$param.by=='up'}点赞{/if}{if$param.by=='score'}评分{/if}</strong>
+									<ul id="list_playlists_common_playlists_list_sort_list">
+										<li>
+											<a href="{:mac_url('/topic/index/by/time')}">最新</a>
+										</li>
+										<li>
+											<a href="{:mac_url('/topic/index/by/hits')}">热门</a>
+										</li>
+										<li>
+											<a href="{:mac_url('/topic/index/by/up')}">点赞</a>
+										</li>
+										<li>
+											<a href="{:mac_url('/topic/index/by/score')}">评分</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="box">
+								<div class="list-playlists">
+									<div class="margin-fix" id="list_playlists_common_playlists_list_items">
+									{maccms:topic num="100" paging="yes" order="desc" by="time"}
+										<div class="item ">
+											<a href="{:mac_url_topic_detail($vo)}" title="{$vo.topic_name}">
+												<div class="img">
+													<img class="thumb video1 lazy-load" src="{$vo.topic_pic|mac_url_img}"
+													 alt="{$vo.topic_name}" title="{$vo.topic_name}" width="320" height="180"
+													 style="display: block;">
+													<img class="thumb video2 lazy-load" src="{$vo.topic_pic|mac_url_img}"alt="{$vo.topic_name}" title="{$vo.topic_name}" width="320" height="180"
+													 style="display: block;">
+												
+												</div>
+												<strong class="title">
+													{$vo.topic_name}
+												</strong>
+												<div class="wrap">
+													<div class="videos">{$vo.topic_rel_vod|explode=',',###|count}视频</div>
+
+													<div class="rating positive">
+														{$vo.topic_up}
+													</div>
+												</div>
+												<div class="wrap">
+													<div class="added"><em>{$vo.topic_time|mac_friend_date}</em></div>
+													<div class="views">{$vo.topic_hits}</div>
+												</div>
+											</a>
+										</div>
+									{/maccms:topic}
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+		</div>
+		{include file="module/tag"}
+		</div>
+		{include file="module/footer_ad"}
+		</div>
+		{include file="system/footer"}
+	
+	</body>
+</html>

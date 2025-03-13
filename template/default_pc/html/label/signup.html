@@ -1,0 +1,65 @@
+<strong class="popup-title">注册</strong>
+<div class="popup-holder">
+	<form id="madouym-signup" action="" data-form="ajax" method="post">
+		<div class="generic-error hidden"></div>
+		<div>
+			<div class="row">
+				<label for="signup_username" class="field-label required">用户名</label>
+				<input type="text"id="signup_name" name="user_name" class="textfield" maxlength="100" placeholder="您的用户名，您可以在这里使用您的电子邮件地址" />
+				<div class="field-error down"></div>
+			</div>
+			<div class="row">
+				<label for="signup_pass" class="field-label required">密码</label>
+				<input type="password"id="signup_pwd" name="user_pwd" class="textfield" placeholder="至少5个字符" />
+				<div class="field-error down"></div>
+			</div>
+			<div class="row">
+				<label for="signup_pass2" class="field-label required">确认密码</label>
+				<input type="password" id="signup_pwd2" name="user_pwd2" class="textfield" placeholder="重复密码" />
+				<div class="field-error down"></div>
+			</div>
+			<div class="bottom">
+				{if condition="$user_config.reg_verify neq 0"}
+				<label>请输入以下验证码。</label>
+				<div class="captcha-control">
+					<div class="image">
+						<img id="verify_img" src="{:url('verify/index')}" onClick="this.src=this.src+'?'" alt="验证码" />
+						<label for="signup_code" class="field-label required">验证码</label>
+						<input type="text" id="verify" name="verify" class="textfield" autocomplete="off" />
+						<div class="field-error up"></div>
+					</div>
+				</div>
+				{/if}	
+				<input type="submit" class="submit" id="btn_signup" value="注册" />
+			</div>
+		</div>
+	</form>
+</div>
+<script>
+	$(function(){
+		$('#btn_signup').click(function() {
+			if ($('#signup_name').val()  == '') { layer.msg('请输入用户！'); $("#signup_name").focus(); return false; }
+			if ($('#signup_pwd').val()  == '') { layer.msg('请输入密码！'); $("#signup_pwd").focus(); return false; }
+			if ($('#signup_pwd2').val()  == '') { layer.msg('请重复输入密码！'); $("#signup_pwd2").focus(); return false; }
+			if ($('#verify').val()  == '') { layer.msg('请输入验证码！'); $("#verify").focus(); return false; }
+			$.ajax({
+				url: "{:mac_url('user/reg')}",
+				type: "post",
+				dataType: "json",
+				data: $('#madouym-signup').serialize(),
+				beforeSend: function () {
+					$("#btn_signup").val("注册中...");
+				},
+				success: function (r) {
+					layer.msg(r.msg);
+					if(r.code==1){
+						location.href="{:mac_url('user/login')}";
+					}
+					else{
+						$('#verify_img').click();
+					}
+				}
+			});
+		});
+	});
+</script>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<title>最新{$obj.type_title}-推荐{$obj.type_title}-第{$param.page}页 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.type_key}" />
+		<meta name="description" content="{$obj.type_des}" />
+		{include file="system/include"}
+	</head>
+	<body>
+		{include file="system/headtop"}
+		<div class="container">
+		{include file="system/search"}
+		{include file="system/headmeun"}
+<div class="content">
+	<div class="main-content">
+		<div class="sidebar">
+			<div class="headline">
+				<h2><a class="icon icon-categories" href="{:mac_url('label/sort')}">查看更多分类</a></h2>
+			</div>
+			<ul class="list">
+			{maccms:type ids="parent" order="asc" by="sort"}
+				<li>
+					<a href="{:mac_url_type($vo)}">{$vo.type_name}<span class="rating">{$vo.type_id|mac_data_count=all}</span></a>
+				</li>
+			{/maccms:type}	
+			</ul>
+		</div>
+		<div class="main-container">
+			<div id="list_videos_latest_videos_list">
+				<div class="headline">
+					<h1>类别{$obj.type_name}的新视频</h1>
+					<div class="sort">
+						<span class="icon type-sort"></span>
+						<strong>新的</strong>
+						<ul id="list_videos_common_videos_list_sort_list">
+							<li>
+								<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'show')}">最新</a>
+							</li>
+							<li>
+								<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'hits' ],'show')}">热门</a>
+							</li>
+							<li>
+								<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'up' ],'show')}">点赞</a>
+							</li>
+							<li>
+								<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'score' ],'show')}">评分</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="box">
+					<div class="list-videos">
+						<div class="margin-fix" id="list_videos_latest_videos_list_items">
+						{maccms:vod num="24" paging="yes"  pageurl="vod/type" order="desc" by="time"}
+						{include file="module/vodlist"}
+						{/maccms:vod}	
+						</div>
+					</div>
+				</div>
+				{include file="system/paging"}
+			</div>
+		</div>
+	</div>
+	{include file="module/tag"}
+</div>
+
+
+
+			{include file="module/footer_ad"}
+		</div>
+		{include file="system/footer"}
+	
+	</body>
+</html>

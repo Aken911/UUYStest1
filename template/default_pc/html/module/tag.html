@@ -1,0 +1,11 @@
+				<div class="box tags-cloud">
+				<div class="box tags-cloud" id="tags">
+				{maccms:vod order="desc" by="time" num="11" ids="all" type="all"}
+				{if condition="$vo.vod_tag eq ''"}
+				{else}
+				{$vo.vod_tag|mac_url_create='tag'}
+				{/if}
+				{/maccms:vod}
+				</div>
+					<a href="{:mac_url('label/tags')}" class="all">显示所有标签</a>
+				</div>

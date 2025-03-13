@@ -1,0 +1,55 @@
+<div class="block-comments" data-block-id="video_comments_video_comments">
+										<form>
+											<label class="field-label">评论</label>
+											<div class="block-new-comment" style="display: block;">
+												<div class="generic-error hidden"></div>
+												<div>
+													<div class="row">
+														<div class="smileys-support">
+															
+															<textarea class="textarea comment_content" id="comment_message" name="comment_content" rows="3" placeholder=""></textarea>
+															<div class="field-error down"></div>
+														</div>
+													</div>
+													<div class="bottom">
+														<input type="button" class="submit comment_submit" value="发送">
+													</div>
+												</div>
+											</div>
+										</form>
+{maccms:comment num="5" paging="yes" order="desc" by="id"}
+{/maccms:comment}
+										<div class="list-comments hidden" style="display: block;">
+											<div id="video_comments_video_comments">
+												<div class="margin-fix" id="video_comments_video_comments_items">
+												
+												{maccms:foreach name="__LIST__" id="vo"}
+													<div class="item hidden">
+														<div class="image">
+															
+																<span class="no-thumb ">没有照片</span>
+														</div>
+
+														<div class="text">
+															<span class="comment-options">
+																<span class="comment-rating digg_num">{$vo.comment_up}</span>
+																<a class="comment-like digg_link" data-id="{$vo.comment_id}" data-mid="4" data-type="up" href="javascript:;">+1</a>
+																<a class="comment-dislike digg_link" data-id="{$vo.comment_id}" data-mid="4" data-type="down" href="javascript:;">-1</a>
+															</span>
+															<span class="comment-info">
+																<a class="username">{$vo.comment_name}</a>
+																{$vo.comment_time|date='Y-m-d H:i:s',###}
+															</span>
+															<p class="comment-text">
+																«<span class="original-text">{$vo.comment_content|mac_em_replace}</span>»
+															</p>
+														</div>
+													</div>
+													{/maccms:foreach}
+													
+													
+												</div>
+
+											</div>
+										</div>
+									</div>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<title>分类大全 - {$maccms.site_name}</title>
+		<meta name="keywords" content="分类大全 - {$maccms.site_keywords}"/>
+		<meta name="description" content="分类大全 - {$maccms.site_description}"/>
+		{include file="system/include"}
+	</head>
+	<body>
+		{include file="system/headtop"}
+		<div class="container">
+		{include file="system/search"}
+		{include file="system/headmeun"}
+		<div class="content">
+		<div class="main-content">
+			<div class="main-container">
+				<div id="list_playlists_common_playlists_list">
+							<div class="headline">
+								<h1> 最受欢迎的类别 </h1>
+							</div>
+							<div class="box">
+								<div class="list-playlists">
+									<div class="margin-fix" id="list_playlists_common_playlists_list_items">
+									{maccms:type ids="parent" order="asc" by="sort"}
+										<div class="item">
+											<a href="{:mac_url_type($vo)}" title="{$vo.type_name}">
+												<div class="img">
+													<img class="thumb video1 lazy-load" src="{:mac_url_img($vo.type_pic)}" alt="{$vo.type_name}" title="{$vo.type_name}" width="320" height="180" >
+												</div>
+												<strong class="title">
+													{$vo.type_name}
+												</strong>
+												<div class="wrap">
+													<div class="videos">{$vo.type_id|mac_data_count=all}部视频</div>
+												</div>
+												
+											</a>
+										</div>
+									{/maccms:type}
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+		</div>
+		{include file="module/tag"}
+		</div>
+		{include file="module/footer_ad"}
+		</div>
+		{include file="system/footer"}
+	
+	</body>
+</html>

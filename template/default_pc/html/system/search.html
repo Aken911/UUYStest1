@@ -1,0 +1,15 @@
+<div class="header">
+				<div class="header-inner">
+					<div class="logo">
+						<a href="/"><img src="{$maccms.site_logo|mac_url_img}" alt="{$maccms.site_name}"></a>
+					</div>
+					<div class="search">
+						<form id="search_form" action="{:mac_url('vod/search')}" method="get" data-url="{:mac_url('vod/search')}">
+							<button type="submit" class="search-button">搜索</button>
+							<div class="search-text">
+								<input type="text" name="wd" placeholder="请输入关键词,至少两个字符" value="" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>

@@ -1,0 +1,25 @@
+<div class="item">
+										<a href="{:mac_url_vod_play($vo)}" title="{$vo.vod_name}">
+											<div class="img">
+												<img class="thumb lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+												 data-original="{:mac_url_img($vo.vod_pic)}" alt="{$vo.vod_name}" width="320" height="180" />
+
+												<span onclick="favs({$vo.vod_id})" class="ico-fav-0" title="加入收藏" data-fav-video-id="{$vo.vod_id}"></span>
+
+												<span class="is-hd">{$vo.vod_remarks}</span> </div>
+											<strong class="title">
+												{$vo.vod_name}
+											</strong>
+											<div class="wrap">
+												<div class="duration">{$vo.vod_duration|mac_default='00:00'}</div>
+
+												<div class="rating positive">
+													{$vo.vod_up}
+												</div>
+											</div>
+											<div class="wrap">
+												<div class="added"><em>{$vo.vod_time|mac_friend_date}</em></div>
+												<div class="views">{$vo.vod_hits}</div>
+											</div>
+										</a>
+									</div>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<title>{$obj.topic_name}专题详情- {$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.topic_name}电影专题,{$obj.topic_name}电视剧专题,{$obj.topic_name}综艺专题,{$obj.topic_name}动漫专题,{$obj.topic_name}推荐专题" />
+		<meta name="description" content="本站提供{$obj.topic_name},最新最全精品专题数据" />
+		{include file="system/include"}
+	</head>
+	<body>
+		{include file="system/headtop"}
+		<div class="container">
+		{include file="system/search"}
+		{include file="system/headmeun"}
+		<div class="content">
+		<div class="main-content">
+		<div class="main-container">
+			<div class="headline">
+				<h2>{$obj.topic_name}</h2>
+				<a onclick="topicfavs({$obj.topic_id})" class="button"><span>收藏</span></a>
+			</div>
+			<div class="block-channel">
+				<div class="img">
+					<img class="thumb" src="{:mac_url_img($obj.topic_pic)}"
+					 alt="{$obj.topic_name}">
+				</div>
+				<div class="channel-rating">
+					<strong>{$obj.topic_score}</strong>
+					<a target="_blank" class="disabled">此专题的评分</a>
+				</div>
+				<div class="channel-info">
+					<div class="desc long" title="{$obj.topic_blurb}">{$obj.topic_blurb}</div>
+				</div>
+			</div>
+			<div id="list_videos_common_videos_list">
+				<div class="headline">
+					<h1> {$obj.topic_name}的视频 </h1>
+				</div>
+
+				<div class="box">
+					<div class="list-videos">
+						<div class="margin-fix" id="list_videos_common_videos_list_items">
+						{maccms:foreach name="$obj.vod_list"}
+						{include file="module/vodlist"}
+						{/maccms:foreach}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		{include file="module/tag"}
+		</div>
+		{include file="module/footer_ad"}
+		</div>
+		{include file="system/footer"}
+	</body>
+</html>

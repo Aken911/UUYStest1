@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<title>{$maccms.site_name}-明星库</title>
+		<meta name="keywords" content="{$maccms.site_keywords}" />
+		<meta name="description" content="{$maccms.site_description}" />
+		{include file="system/include"}
+	</head>
+	<body>
+		{include file="system/headtop"}
+		<div class="container">
+		{include file="system/search"}
+		{include file="system/headmeun"}
+<div class="content">
+	<div class="main-content">
+		
+		<div class="main-container">
+			<div id="list_models_models_list">
+				<div class="headline">
+					<h1>最受欢迎的明星 </h1>
+					<div class="sort">
+						<span class="icon type-sort"></span>
+						<strong>{if$param.by==''||$param.by=='time'}最新{/if}{if$param.by=='hits'}热门{/if}{if$param.by=='up'}点赞{/if}{if$param.by=='score'}评分{/if}</strong>
+						<ul id="list_models_models_list_sort_list">
+							<li>
+								<a href="{:mac_url('actor/index')}">最新</a>
+							</li>
+							<li>
+								<a href="{:mac_url('actor/show',['area'=>$param['area'],'sex'=>$param['sex'],'blood'=>$param['blood'],'starsign'=>$param['starsign'],'id'=>8,'by'=>'hits'])}">热门</a>
+							</li>
+							<li>
+								<a href="{:mac_url('actor/show',['area'=>$param['area'],'sex'=>$param['sex'],'blood'=>$param['blood'],'starsign'=>$param['starsign'],'id'=>8,'by'=>'up'])}">点赞</a>
+							</li>
+							<li>
+								<a href="{:mac_url('actor/show',['area'=>$param['area'],'sex'=>$param['sex'],'blood'=>$param['blood'],'starsign'=>$param['starsign'],'id'=>8,'by'=>'score'])}">评分</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="box">
+					<div class="list-models">
+						<div class="margin-fix" id="list_models_models_list_items">
+						{maccms:actor num="20" paging="yes" pageurl="actor/index" order="desc" by="time"}
+						<a class="item" href="{$vo|mac_url_actor_detail}" title="{$vo.actor_name}">
+							<div class="img">
+								<img class="thumb" src="{$vo.actor_pic|mac_url_img}" alt="{$vo.actor_name}">
+							</div>
+							<strong class="title">{$vo.actor_name}</strong>
+							<div class="wrap">
+								<div class="views">{$vo.actor_hits}</div>
+									<div class="rating positive">
+									{$vo.actor_up}
+									</div>
+							</div>
+						</a>
+						{/maccms:actor}	
+							
+						</div>
+					</div>
+				</div>
+				{include file="system/paging"}
+			</div>
+		</div>
+	</div>
+	
+{include file="module/tag"}
+</div>
+
+
+
+
+			{include file="module/footer_ad"}
+		</div>
+		{include file="system/footer"}
+	
+	</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<title>在线播放{$obj.vod_name} {$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']} - 高清资源 -
+			{$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.vod_name}{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}免费在线观看,{$obj.vod_name}剧情介绍" />
+		<meta name="description" content="{$obj.vod_name}{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}免费在线观看,{$obj.vod_name}剧情介绍" />
+		{include file="system/include"}
+	</head>
+	<body>
+		{include file="system/headtop"}
+		<div class="container">
+			{include file="system/search"}
+			{include file="system/headmeun"}
+			<div class="content">
+				<div class="headline">
+					<h1>{$obj.vod_name}</h1>
+				</div>
+				<div class="block-video">
+					{include file="module/player_ad"}
+					<div class="video-holder">
+						<div class="player">
+							<div class="player-holder">
+								<div class="player-wrap">
+									{$player_data} {$player_js}
+								</div>
+							</div>
+						</div>
+						<div class="video-info">
+							<div class="info-holder">
+								<div class="info-buttons">
+									<div class="rating-container">
+										<a href="#like" class="rate-like digg_link" title="我喜欢" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-mid="{$maccms.mid}" data-type="up">我喜欢</a>
+										<a href="#dislike" class="rate-dislike digg_link" title="我不喜欢" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-mid="{$maccms.mid}" data-type="down">我不喜欢</a>
+										<div class="rating">
+											<span class="voters" id="percentage" data-success="谢谢！" data-error="此IP已经投票"></span>
+											<span class="scale-holder positive"><span class="scale" id="percentagewidth" style="width:0%;" data-rating="4.0000" data-votes="2"></span></span>
+										</div>
+									</div>
+									<div class="btn-favourites">
+										<a class="drop" title="加入标签">
+											<span class="ico-favourite"></span>
+										</a>
+										<ul>
+											<li onclick="favs({$obj.vod_id})" id="add_fav_0"><a>添加到收藏</a></li>
+										</ul>
+									</div>
+									<div class="tabs-menu">
+										<ul>
+											<li><a href="#tab_video_info" class="toggle-button active">简介</a></li>
+											<li onclick="MAC.Gbook.Report('编号【{$obj.vod_id}】名称【{$obj.vod_name}】不能观看请检查修复，页面地址' + location.href,'{$obj.vod_id}')"><a
+												 href="#tab_report_rrror" class="toggle-button">报错</a></li>
+											<li><a href="#tab_share" class="toggle-button">分享</a></li>
+											<li><a href="#tab_comments" class="toggle-button">评论 </a></li>
+										</ul>
+									</div>
+								</div>
+								<div id="tab_video_info" class="tab-content" style="display: block;">
+									<div class="block-details">
+
+										<div class="info">
+											<div class="item">
+												<span>时长: <em>{$obj.vod_duration|mac_default='00:00'}</em></span>
+												<span>浏览: <em class="mac_hits hits" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}" data-type="hits"></em></span>
+												<span>加入日期: <em>{$obj.vod_time|mac_friend_date}</em></span>
+											</div>
+											<div class="item">
+												描述:
+												<em>{$obj.vod_blurb}</em>
+											</div>
+
+											<div class="item">
+												类别:
+												<a class="link" href="{:mac_url_type($obj)}">{$obj.type.type_name}</a>
+											</div>
+											<div class="item">
+												标签:
+												{$obj.vod_tag|mac_default='暂无'|mac_url_create='tag'}
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="tab_share" class="tab-content hidden" style="display: none;">
+									<div class="block-share">
+										<form>
+											<div class="row">
+												<label for="share_link" class="field-label">分享地址</label>
+												<input type="text" id="share_link" class="textfield middle" value="{$obj.vod_name}-{$maccms.http_type}{$maccms.site_url}{:mac_url_vod_play($obj,['sid'=>$param['sid'],'nid'=>$param['nid']])}"
+												 readonly="">
+											</div>
+											<div class="row">
+												<label for="share_bb_code" class="field-label">嵌入代码</label>
+												<input type="text" id="share_bb_code" class="textfield" value="&lt;iframe src=&#039;{$maccms.http_type}{$maccms.site_url}{:mac_url_vod_play($obj,['sid'=>$param['sid'],'nid'=>$param['nid']])}&#039; frameborder=&#039;0&#039; width=&#039;640&#039; height=&#039;340&#039; scrolling=&#039;no&#039; allowfullscreen&gt;&lt;/iframe&gt;"
+												 readonly="">
+											</div>
+										</form>
+									</div>
+								</div>
+								<div id="tab_comments" class="tab-content hidden" style="display: none;">
+								<div class="mac_comment" data-id="{$obj.vod_id}" data-mid="{$maccms.mid}"></div>
+								<script>
+								$(function(){
+									MAC.Comment.Login = {$comment.login};
+									MAC.Comment.Verify = {$comment.verify};
+									MAC.Comment.Init();
+									MAC.Comment.Show(1);
+								});
+								</script>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="related-videos" id="list_videos_related_videos">
+					<ul class="list-sort" id="list_videos_related_videos_filter_list">
+						<li><span>相关视频</span></li>
+					</ul>
+					<div class="box">
+						<div class="list-videos">
+							<div class="margin-fix" id="list_videos_related_videos_items">
+								{maccms:vod num="8" type="current" order="desc" by="rnd"}
+								{include file="module/vodlist"}
+								{/maccms:vod}
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="module/tag"}
+			</div>
+			{include file="module/footer_ad"}
+		</div>
+		<span style="display:none" class="mac_ulog_set" alt="设置播放页浏览记录" data-type="4" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}" data-sid="{$param.sid}" data-nid="{$param.nid}"></span>
+		{include file="system/footer"}
+		<script>
+			function GetPercent(num, total) {
+			num = parseFloat(num);
+			total = parseFloat(total);
+			if (isNaN(num) || isNaN(total)) {
+					return "-";
+			};
+					return total <= 0 ? "0%" : (Math.round(num / total * 10000) / 100 + "%");
+			};
+			var up = {$obj.vod_up};
+			var down = {$obj.vod_down};
+			var zong = up + down;
+			$("#percentagewidth").css({"width": GetPercent(up, zong)});
+			var he = GetPercent(up, zong);
+			var zs = parseInt(he);
+			document.getElementById('percentage').innerHTML = parseInt(he) + "%";
+			</script>
+	</body>
+</html>

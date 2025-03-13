@@ -1,0 +1,76 @@
+<strong class="popup-title">登录</strong>
+<div class="popup-holder">
+	<form id="madouym-login" action="" data-form="ajax" method="post">
+		<div class="generic-error hidden">
+		</div>
+		<div>
+			<div class="row">
+				<label for="login_username" class="field-label required">用户名</label>
+				<input type="text" id="login_name" name="user_name" class="textfield" placeholder="输入用户名" />
+				<div class="field-error down"></div>
+			</div>
+
+			<div class="row">
+				<label for="login_pass" class="field-label required">密码</label>
+				<input type="password" id="login_pwd" name="user_pwd" class="textfield" />
+				<div class="field-error down"></div>
+			</div>
+			<div class="row">
+				<input type="checkbox" name="remember_me" id="login_remember_me" class="checkbox" value="1" />
+				<label for="login_remember_me">记住我</label>
+			</div>
+
+
+			<div class="bottom">
+				{if condition="$GLOBALS['config']['user']['login_verify'] eq 1"}
+				<label>请输入以下验证码。</label>
+				<div class="captcha-control">
+					<div class="image">
+						<img id="verify_img" src="{:url('verify/index')}" onClick="this.src=this.src+'?'"  alt="点击刷新验证码" />
+						<label for="signup_code" class="field-label required">验证码</label>
+						<input type="text" id="verify" name="verify" class="textfield" autocomplete="off" />
+						<div class="field-error up"></div>
+					</div>
+					
+				</div>
+				{/if}
+				<input type="submit" class="submit" id="btn_login" value="登入" />
+				<div class="links">
+					<p><a href="{:mac_url('label/signup')}" data-fancybox="ajax">还没有账号吗？免费加入！</a></p>
+					<p>
+						<a href="{:mac_url('label/reset-password')}" data-fancybox="ajax">忘记密码？</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<script>
+	$(function(){
+		$('#btn_login').click(function() {
+			if ($('#login_name').val()  == '') { layer.msg('请输入用户！'); $("#login_name").focus(); return false; }
+			if ($('#login_pwd').val()  == '') { layer.msg('请输入密码！'); $("#login_pwd").focus(); return false; }
+			if ($('#verify').val()  == '') { layer.msg('请输入验证码！'); $("#verify").focus(); return false; }
+
+			$.ajax({
+				url: "{:mac_url('user/login')}",
+				type: "post",
+				dataType: "json",
+				data: $('#madouym-login').serialize(),
+				beforeSend: function () {
+					$("#btn_login").val("登录中...");
+				},
+				success: function (r) {
+					if(r.code==1){
+						location.href="{:mac_url('user/index')}";
+					}
+					else{
+						layer.msg(r.msg);
+						$('#verify_img').click();
+					}
+				}
+			});
+
+		});
+	});
+</script>

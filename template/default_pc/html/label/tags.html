@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<title>视频标签-{$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}" />
+		<meta name="description" content="{$maccms.site_description}" />
+		{include file="system/include"}
+	</head>
+	<body>
+		{include file="system/headtop"}
+		<div class="container">
+		{include file="system/search"}
+		{include file="system/headmeun"}
+			<div class="content">
+				<div class="main-content">
+					<div class="main-container">
+						<div class="headline">
+							<h1>标签</h1>
+						</div>
+						<div class="box">
+							<div class="list-tags">
+								<div class="margin-fix">
+									<ul class="item" id="mdym">
+									{maccms:vod order="desc" by="hits" num="20"  paging="yes" pageurl="label/tags" ids="all" type="all"}
+                					{php}
+                                    $tagarr = explode(',',$vo['vod_tag']);
+                                    foreach($tagarr as $k=>$v){
+                                        if (!preg_match("/[\x7f-\xff]/", $v)){
+                                            unset($tagarr[$k]);
+                                        }
+                                    }
+                                    $vo['vod_tag'] = implode(',',$tagarr);
+                                    {/php}
+            						
+            						{if condition="$vo.vod_tag eq ''"}
+            						{else}
+            						{$vo.vod_tag|mac_url_create='tag'}
+            						{/if}
+            						{/maccms:vod}
+									</ul>
+									<script>
+									    
+									    $(function(){
+                        					var json = {};
+                        					var $div = $("#mdym");
+                        					var $diva = $div.find("a");
+                        					var tags_url="{:mac_url('vod/search')}?tag=";
+                        					$diva.each(function(){
+                        						var key = $(this).html();
+                        						json[key] = key;
+                        							
+                        					});
+                        					$div.empty();
+                        					for(var key in json){
+                        						$div.append("<li><a href='"+tags_url+""+key+"'>"+key+"</a></li>");
+                        					}   
+                        				})
+									</script>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{include file="system/paging"}
+			{include file="module/footer_ad"}
+		</div>
+		{include file="system/footer"}
+	</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<title>{$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}" />
+		<meta name="description" content="{$maccms.site_description}" />
+		{include file="system/include"}
+	</head>
+	<body>
+		{include file="system/headtop"}
+		<div class="container">
+		{include file="system/search"}
+		{include file="system/headmeun"}
+			<div class="content">
+				<div class="main-content">
+					<div class="main-container">
+						<div class="headline">
+							<h1> 正在看着 </h1>
+							<div class="sort">
+								<span class="icon type-sort"></span>
+								<strong>新的</strong>
+								<ul id="list_videos_most_recent_videos_sort_list">
+									<li>
+										<a href="{:mac_url_search(['wd'=>$param['wd'],'area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'vod')}">最新</a>
+									</li>
+									<li>
+										<a href="{:mac_url_search(['wd'=>$param['wd'],'area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'hits' ],'vod')}">热门</a>
+									</li>
+									<li>
+										<a href="{:mac_url_search(['wd'=>$param['wd'],'area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'up' ],'vod')}">点赞</a>
+									</li>
+									<li>
+										<a href="{:mac_url_search(['wd'=>$param['wd'],'area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'scpre' ],'vod')}">评分</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="box">
+							<div class="list-videos">
+								<div class="margin-fix" id="list_videos_videos_watched_right_now_items">
+									{maccms:vod num="8" by="hits_add" order="desc"}
+									{include file="module/vodlist"}
+									{/maccms:vod}
+								</div>
+							</div>
+						</div>
+						<div id="list_videos_most_recent_videos">
+							<div class="headline">
+								<h2> 最新视频 </h2>
+
+								<div class="sort">
+									<span class="icon type-sort"></span>
+									<strong>新的</strong>
+									<ul id="list_videos_most_recent_videos_sort_list">
+										<li>
+											<a href="{:mac_url_search(['wd'=>$param['wd'],'area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'vod')}">最新</a>
+										</li>
+										<li>
+											<a href="{:mac_url_search(['wd'=>$param['wd'],'area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'hits' ],'vod')}">热门</a>
+										</li>
+										<li>
+											<a href="{:mac_url_search(['wd'=>$param['wd'],'area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'up' ],'vod')}">点赞</a>
+										</li>
+										<li>
+											<a href="{:mac_url_search(['wd'=>$param['wd'],'area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'scpre' ],'vod')}">评分</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="box">
+								<div class="list-videos">
+									<div class="margin-fix" id="list_videos_most_recent_videos_items">
+										{maccms:vod num="8" by="time" order="desc"}
+										{include file="module/vodlist"}
+										{/maccms:vod}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="list_models_models_list">
+							<div class="headline">
+								<h1>
+									最受欢迎的明星 </h1>
+
+								<div class="sort">
+									<span class="icon type-sort"></span>
+									<strong>最受欢迎的</strong>
+									<ul id="list_models_models_list_sort_list">
+										<li>
+											<a href="{:mac_url('actor/show',['area'=>$param['area'],'sex'=>$param['sex'],'blood'=>$param['blood'],'starsign'=>$param['starsign'],'id'=>8,'by'=>'time'])}">最新</a>
+										</li>
+										<li>
+											<a href="{:mac_url('actor/show',['area'=>$param['area'],'sex'=>$param['sex'],'blood'=>$param['blood'],'starsign'=>$param['starsign'],'id'=>8,'by'=>'hits'])}">热门</a>
+										</li>
+										<li>
+											<a href="{:mac_url('actor/show',['area'=>$param['area'],'sex'=>$param['sex'],'blood'=>$param['blood'],'starsign'=>$param['starsign'],'id'=>8,'by'=>'up'])}">点赞</a>
+										</li>
+										<li>
+											<a href="{:mac_url('actor/show',['area'=>$param['area'],'sex'=>$param['sex'],'blood'=>$param['blood'],'starsign'=>$param['starsign'],'id'=>8,'by'=>'score'])}">评分</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="box">
+								<div class="list-models">
+									<div class="margin-fix" id="list_models_models_list_items">
+									{maccms:actor num="5" order="desc" by="time"}	
+										<a class="item" href="{$vo|mac_url_actor_detail}" title="{$vo.actor_name}">
+											<div class="img">
+												<img class="thumb" src="{$vo.actor_pic|mac_url_img}" alt="{$vo.actor_name}">
+											</div>
+											<strong class="title">{$vo.actor_name}</strong>
+											<div class="wrap">
+												<div class="views">{$vo.actor_hits}</div>
+												<div class="rating positive">
+													{$vo.actor_up}
+												</div>
+											</div>
+										</a>
+									{/maccms:actor}	
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="list_playlists_common_playlists_list">
+
+							<div class="headline">
+								<h1> 最受欢迎的专题 </h1>
+
+								<div class="sort">
+									<span class="icon type-sort"></span>
+									<strong>最受欢迎的</strong>
+									<ul id="list_playlists_common_playlists_list_sort_list">
+										<li>
+											<a href="{:mac_url('/topic/index/by/time')}">最新</a>
+										</li>
+										<li>
+											<a href="{:mac_url('/topic/index/by/hist')}">热门</a>
+										</li>
+										<li>
+											<a href="{:mac_url('/topic/index/by/up')}">点赞</a>
+										</li>
+										<li>
+											<a href="{:mac_url('/topic/index/by/score')}">评分</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="box">
+								<div class="list-playlists">
+									<div class="margin-fix" id="list_playlists_common_playlists_list_items">
+									{maccms:topic num="4" order="desc" by="time"}
+										<div class="item ">
+											<a href="{:mac_url_topic_detail($vo)}" title="{$vo.topic_name}">
+												<div class="img">
+													<img class="thumb video1 lazy-load" src="{$vo.topic_pic|mac_url_img}"
+													 alt="{$vo.topic_name}" title="{$vo.topic_name}" width="320" height="180"
+													 style="display: block;">
+													<img class="thumb video2 lazy-load" src="{$vo.topic_pic|mac_url_img}"alt="{$vo.topic_name}" title="{$vo.topic_name}" width="320" height="180"
+													 style="display: block;">
+												
+												</div>
+												<strong class="title">
+													{$vo.topic_name}
+												</strong>
+												<div class="wrap">
+													<div class="videos">{$vo.topic_rel_vod|explode=',',###|count}视频</div>
+
+													<div class="rating positive">
+														{$vo.topic_up}
+													</div>
+												</div>
+												<div class="wrap">
+													<div class="added"><em>{$vo.topic_time|mac_friend_date}</em></div>
+													<div class="views">{$vo.topic_hits}</div>
+												</div>
+											</a>
+										</div>
+									{/maccms:topic}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{include file="module/tag"}
+			</div>
+			{include file="module/footer_ad"}
+			<div class="footer-margin">
+				<div class="content">
+					<div style="font-size:14px">
+						<span>友情链接</span>:
+						{maccms:link num="1000" type="all" order="desc" by="id"}
+						<a target="_blank" rel="nofollow" style="margin-left:10px" href="{$vo.link_url}"><u><span>{$vo.link_name}</span></u></a>
+						{/maccms:link}
+					</div>
+
+				</div>
+			</div>
+		</div>
+		{include file="system/footer"}
+	</body>
+</html>

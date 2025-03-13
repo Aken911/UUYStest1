@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<title>{$obj.actor_name}个人资料_{$obj.actor_name}演过的电视剧_{$obj.actor_name}电影全集-{$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.actor_name}个人资料,{$obj.actor_name}演过的电视剧,{$obj.actor_name}电影全集,{$obj.actor_name}最新电影,{$obj.actor_name}最新电视剧">
+		<meta name="description" content="{$maccms.site_name}演示站为你收集了{$obj.actor_name}个人资料包括了{$obj.actor_name}最新演过的电视剧,{$obj.actor_name}电影全集,以及{$obj.actor_name}图片剧照最近动态等信息希望你能喜欢。">
+		{include file="system/include"}
+	</head>
+	<body>
+		{include file="system/headtop"}
+		<div class="container">
+		{include file="system/search"}
+		{include file="system/headmeun"}
+<div class="content">
+	<div class="main-content">
+		<div class="main-container">
+			<div class="headline">
+				<h2>{$obj.actor_name}</h2>
+				<a onclick="actorfavs({$obj.topic_id})" class="button"><span>收藏</span></a>
+			</div>
+			<div class="block-model">
+				<div class="img">
+					<a>
+						<img class="thumb" src="{:mac_url_img($obj.actor_pic)}" alt="Eminem">
+					</a>
+				</div>
+				<ul class="model-list">
+					<li>地区: <span>{$obj.actor_area|mac_default='暂无相关信息'}</span></li>
+					<li>星座: <span>{$obj.actor_starsign|mac_default='暂无相关信息'}</span></li>
+					<li>出生地: <span>{$obj.actor_birtharea|mac_default='暂无相关信息'}</span></li>
+					<li>性别: <span>{$obj.actor_sex}</span></li>
+					<li>生日: <span>{$obj.actor_birthday|mac_default='暂无相关信息'}</span></li>
+					<li>身高: <span>{$obj.actor_height|mac_default='暂无相关信息'}</span></li>
+					<li>体量: <span>{$obj.actor_weight|mac_default='暂无相关信息'}</span></li>
+				</ul>
+				<div class="desc" title="">{$obj.actor_blurb|mac_default='没有描述'}</div>
+			</div>
+			<div id="list_videos_common_videos_list">
+
+				<div class="headline">
+					<h1> 与{$obj.actor_name}的视频 </h1>
+				</div>
+
+				<div class="box">
+					<div class="list-videos">
+						<div class="margin-fix" id="list_videos_common_videos_list_items">
+						{maccms:vod num="1000" actor="'.$obj['actor_name'].'" order="desc" by="time"}
+						{include file="module/vodlist"}
+						{/maccms:vod}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{include file="module/tag"}
+
+
+
+</div>
+
+
+
+
+
+			{include file="module/footer_ad"}
+		</div>
+		{include file="system/footer"}
+	
+	</body>
+</html>
